@@ -5,6 +5,8 @@ from django.views.generic.base import RedirectView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from django.views.static import serve
+from django.conf import settings
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -60,25 +62,21 @@ auth_urlpatterns = [
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
-    
+
     # API
     path('api/', include([
-        # Documentação da API
         path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
         path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
         path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-        
-        # Endpoint raiz da API
         path('', api_root, name='api_root'),
-        
-        # Outros endpoints da API
     ] + api_urlpatterns)),
-    
-    # Autenticação (fora da API)
+
+    # Autenticação (não usada no frontend)
     path('auth/', include(auth_urlpatterns)),
-    
-    # Redirecionamentos
-    path('', RedirectView.as_view(url='/auth/login/'), name='root'),
-    path('login/', RedirectView.as_view(url='/auth/login/'), name='login_redirect'),
-    path('registro/', RedirectView.as_view(url='/auth/registro/'), name='registro_redirect'),
+
+    # Redirecionar raiz do site para sua calculadora
+    path('', RedirectView.as_view(url='/static/calculadora/index.html', permanent=False)),
+
+    # (opcional) Rotas de fallback direto para arquivos estáticos
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
