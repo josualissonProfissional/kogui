@@ -123,7 +123,9 @@ USE_TZ = os.getenv('USE_TZ', 'True') == 'True'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'kogui_portal', 'static'),
+]
 
 # Media files
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
