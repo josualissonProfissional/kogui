@@ -43,7 +43,7 @@ wheels/
 *.log
 
 # Arquivos estáticos coletados
-staticfiles/
+#staticfiles/
 
 # Arquivos de mídia
 media/
