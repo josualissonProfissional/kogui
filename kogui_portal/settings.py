@@ -28,7 +28,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key-for-developmen
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1', 'kogui.onrender.com').split(',')
+allowed_hosts = os.getenv('ALLOWED_HOSTS')
+if allowed_hosts:
+    ALLOWED_HOSTS = allowed_hosts.split(',')
+else:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'kogui.onrender.com']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Application definition
