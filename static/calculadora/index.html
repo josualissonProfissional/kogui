@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Avançada</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="logout-bar" style="display:none; position: absolute; top: 20px; right: 40px; z-index: 10;">
+        <span id="user-info" style="color: #fff; font-weight: bold; margin-right: 16px;"></span>
+        <button id="logout-btn" class="btn" style="background: #c0392b; color: #fff; font-weight: bold; border: none; padding: 8px 18px; border-radius: 8px; cursor: pointer;">Sair</button>
+    </div>
+
+    <div id="login-modal" style="display:none; position: fixed; z-index: 999; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(40,0,70,0.85); justify-content: center; align-items: center;">
+        <div style="display: flex; gap: 20px;">
+            <!-- Formulário de Login -->
+            <form id="login-form" style="background: #2d1046; padding: 32px 28px; border-radius: 14px; box-shadow: 0 4px 32px #0009; min-width: 340px; display: flex; flex-direction: column; gap: 18px; align-items: stretch;">
+                <h2 style="margin: 0 0 8px 0; color: #fff; text-align: center;">Login</h2>
+                <input id="login-email" type="email" placeholder="E-mail" required style="padding: 10px 12px; border-radius: 6px; border: none; font-size: 1rem; margin-bottom: 8px;">
+                <input id="login-senha" type="password" placeholder="Senha" required style="padding: 10px 12px; border-radius: 6px; border: none; font-size: 1rem; margin-bottom: 8px;">
+                <button type="submit" class="btn" style="background: #7d3c98; color: #fff; font-weight: bold; border: none; padding: 10px; border-radius: 8px; cursor: pointer;">Entrar</button>
+                <div id="login-error" style="color: #ff7675; font-size: 0.98rem; text-align: center; display: none;"></div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <a href="#" id="show-register" style="color: #a29bfe; text-decoration: none; font-size: 0.9rem;">Criar nova conta</a>
+                </div>
+            </form>
+
+            <!-- Formulário de Registro (inicialmente oculto) -->
+            <form id="register-form" style="background: #2d1046; padding: 32px 28px; border-radius: 14px; box-shadow: 0 4px 32px #0009; min-width: 340px; display: none; flex-direction: column; gap: 12px; align-items: stretch;">
+                <h2 style="margin: 0 0 8px 0; color: #fff; text-align: center;">Criar Conta</h2>
+                <input id="register-nome" type="text" placeholder="Nome completo" required style="padding: 10px 12px; border-radius: 6px; border: none; font-size: 1rem;">
+                <input id="register-username" type="text" placeholder="Nome de usuário" required style="padding: 10px 12px; border-radius: 6px; border: none; font-size: 1rem;">
+                <input id="register-email" type="email" placeholder="E-mail" required style="padding: 10px 12px; border-radius: 6px; border: none; font-size: 1rem;">
+                <input id="register-password1" type="password" placeholder="Senha" required style="padding: 10px 12px; border-radius: 6px; border: none; font-size: 1rem;">
+                <input id="register-password2" type="password" placeholder="Confirme a senha" required style="padding: 10px 12px; border-radius: 6px; border: none; font-size: 1rem; margin-bottom: 8px;">
+                <button type="submit" class="btn" style="background: #6c5ce7; color: #fff; font-weight: bold; border: none; padding: 10px; border-radius: 8px; cursor: pointer;">Cadastrar</button>
+                <div id="register-error" style="color: #ff7675; font-size: 0.9rem; text-align: center; min-height: 20px; margin-top: 5px;"></div>
+                <div style="text-align: center; margin-top: 8px;">
+                    <a href="#" id="show-login" style="color: #a29bfe; text-decoration: none; font-size: 0.9rem;">Já tenho uma conta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Calculadora Avançada</h1>
+        <h2>Calculadora com histórico de operações</h2>
+        <div class="main-content">
+            <div class="calculator">
+                <div class="calculator-display">
+                    <div class="expression-display" id="expression-display"></div>
+                    <div class="result-display" id="result-display">0</div>
+                </div>
+                <div class="buttons">
+                    <button class="btn clear">C</button>
+                    <button class="btn invert">±</button>
+                    <button class="btn percent">%</button>
+                    <button class="btn divide">÷</button>
+                    <button class="btn number">7</button>
+                    <button class="btn number">8</button>
+                    <button class="btn number">9</button>
+                    <button class="btn multiply">×</button>
+                    <button class="btn number">4</button>
+                    <button class="btn number">5</button>
+                    <button class="btn number">6</button>
+                    <button class="btn subtract">-</button>
+                    <button class="btn number">1</button>
+                    <button class="btn number">2</button>
+                    <button class="btn number">3</button>
+                    <button class="btn add">+</button>
+                    <button class="btn zero">0</button>
+                    <button class="btn dot">.</button>
+                    <button class="btn equal">=</button>
+                </div>
+            </div>
+            <div class="history">
+                <div class="history-header">
+                    <span>Histórico</span>
+                    <button class="btn clear-history">🗑️</button>
+                </div>
+                <div class="history-list" id="history-list"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
